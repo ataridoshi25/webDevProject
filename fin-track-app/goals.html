@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Track your financial and savings goals.">
+    <title>FinTrack | Savings Goals</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">FinTrack</div>
+            <ul class="nav-links" id="navLinks">
+                </ul>
+        </nav>
+    </header>
+
+    <main class="goals-container">
+        <section class="form-card">
+            <h2>Set a Savings Goal</h2>
+            <form id="goalForm">
+                <div class="form-group">
+                    <label for="goalName">Goal Name</label>
+                    <input type="text" id="goalName" required placeholder="e.g., New Laptop, Summer Vacation">
+                </div>
+                <div class="form-group">
+                    <label for="targetAmount">Target Amount ($)</label>
+                    <input type="number" id="targetAmount" min="1" required placeholder="e.g., 1200">
+                </div>
+                <button type="submit" class="btn">Create Goal</button>
+            </form>
+        </section>
+
+        <section class="goals-display">
+            <h3>Active Targets</h3>
+            <div id="goalsList" class="goals-grid">
+                </div>
+        </section>
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script src="js/goals.js"></script>
+</body>
+</html>
