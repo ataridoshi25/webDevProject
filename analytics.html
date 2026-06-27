@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Live exchange and global currency analytics." />
+    <title>FinTrack | Market Analytics</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="logo">FinTrack</div>
+        <ul class="nav-links" id="navLinks"></ul>
+      </nav>
+    </header>
+
+    <main class="analytics-container">
+      <section class="info-card">
+        <h2>Global Currency Exchange Rates</h2>
+        <p>Real-time data streams consumed asynchronously via public REST endpoint interfaces.</p>
+
+        <div id="ratesContainer" class="rates-grid"></div>
+      </section>
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script src="js/analytics.js"></script>
+  </body>
+</html>
