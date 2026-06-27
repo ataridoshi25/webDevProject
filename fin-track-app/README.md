@@ -7,8 +7,10 @@ This project was built from scratch to fulfill the Web Development Final Exam cr
 
 ## Core Features
 - **Client-Side Authentication:** Secure-looking gateway simulation that manages user sessions and alters application layout states depending on authentication status.
-- **Dynamic Ledger Management:** Imperative DOM manipulation allows users to add, read, and delete financial transactions with real-time balance calculations.
-- **Asynchronous Market Analytics:** Integrates with a public REST API utilizing the Fetch API and `async/await` syntax to pull current currency exchange data.
+- **Dynamic Ledger Management (`dashboard.html`):** Imperative DOM manipulation allows users to add, read, and delete financial transactions with real-time balance calculations.
+- **Asynchronous Market Analytics (`analytics.html`):** Integrates with a public REST API utilizing the Fetch API and `async/await` syntax to pull current currency exchange data.
+- **Savings Goals Tracker (`goals.html`):** An additional dedicated interactive space allowing users to set target savings items and clear them dynamically via event listeners.
+- **User Profile Context (`profile.html`):** Reads active authentication states to showcase protected user tier details.
 - **Multi-Device Responsive Interface:** Built using mobile-first Flexbox layouts and fluid media queries to ensure compatibility across mobile, tablet, and desktop viewports.
 
 ## Architecture & Technologies
