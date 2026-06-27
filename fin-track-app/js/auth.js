@@ -7,22 +7,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const userSession = JSON.parse(localStorage.getItem("userSession"));
 
   // Render Navigation Links dynamically based on Authentication state
-  function renderNavigation(isLoggedIn) {
+function renderNavigation(isLoggedIn) {
     if (isLoggedIn) {
-      navLinks.innerHTML = `
-                <li><a href="dashboard.html">Dashboard</a></li>
-                <li><a href="analytics.html">Market Rates</a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="#" id="logoutBtn">Logout</a></li>
-            `;
-      document.getElementById("logoutBtn").addEventListener("click", () => {
-        localStorage.removeItem("userSession");
-        window.location.href = "index.html";
-      });
+        navLinks.innerHTML = `
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="analytics.html">Market Rates</a></li>
+            <li><a href="goals.html">Savings Goals</a></li> <li><a href="profile.html">Profile</a></li>
+            <li><a href="#" id="logoutBtn">Logout</a></li>
+        `;
+        document.getElementById("logoutBtn").addEventListener("click", () => {
+            localStorage.removeItem("userSession");
+            window.location.href = "index.html";
+        });
     } else {
-      navLinks.innerHTML = `<li><a href="index.html">Login</a></li>`;
+        navLinks.innerHTML = `<li><a href="index.html">Login</a></li>`;
     }
-  }
+}
 
   renderNavigation(!!userSession);
 
