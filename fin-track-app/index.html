@@ -20,22 +20,50 @@
     <!-- Centered login form area -->
     <main class="auth-container">
       <section class="form-card">
-        <h1>Welcome Back</h1>
-        <!-- This message shows validation or success feedback -->
+        <h1 id="authTitle">Welcome Back</h1>
         <p id="feedbackMessage" class="hidden"></p>
 
-        <!-- Login form: email + password + submit button -->
+        <p class="auth-note">Demo login: <a href="mailto:demo@fintrack.com">demo@fintrack.com</a> / fintrack123</p>
+
         <form id="loginForm" novalidate>
           <div class="form-group">
             <label for="email">Email Address</label>
             <input type="email" id="email" required placeholder="name@example.com" />
           </div>
+
           <div class="form-group">
             <label for="password">Password</label>
             <input type="password" id="password" required minlength="6" placeholder="••••••••" />
           </div>
+
           <button type="submit" class="btn">Sign In</button>
         </form>
+
+        <form id="registerForm" class="hidden" novalidate>
+          <div class="form-group">
+            <label for="registerName">Full Name</label>
+            <input type="text" id="registerName" required placeholder="John Doe" />
+          </div>
+
+          <div class="form-group">
+            <label for="registerEmail">Email Address</label>
+            <input type="email" id="registerEmail" required placeholder="name@example.com" />
+          </div>
+
+          <div class="form-group">
+            <label for="registerPassword">Password</label>
+            <input type="password" id="registerPassword" required minlength="6" placeholder="••••••••" />
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" required minlength="6" placeholder="••••••••" />
+          </div>
+
+          <button type="submit" class="btn">Create Account</button>
+        </form>
+
+        <button type="button" id="toggleAuthBtn" class="btn secondary">Need an account? Register</button>
       </section>
     </main>
 

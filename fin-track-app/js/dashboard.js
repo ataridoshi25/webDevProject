@@ -1,5 +1,10 @@
-// Restore saved ledger entries so they survive page reloads
-let entries = JSON.parse(localStorage.getItem("finTrackEntries") || "[]");
+// Remove the old shared transaction key so stale entries do not leak between accounts
+localStorage.removeItem("finTrackEntries");
+
+// Restore saved ledger entries for the current signed-in user only
+const currentUser = JSON.parse(localStorage.getItem("userSession"));
+const storageKey = currentUser ? `finTrackEntries_${currentUser.email}` : "finTrackEntries_guest";
+let entries = JSON.parse(localStorage.getItem(storageKey) || "[]");
 
 // Grab the form and display elements from the HTML page
 const entryForm = document.getElementById("entryForm");
@@ -8,7 +13,7 @@ const balanceDisplay = document.getElementById("totalBalance");
 
 // Save the current list to browser storage so it stays after navigation
 function saveEntries() {
-  localStorage.setItem("finTrackEntries", JSON.stringify(entries));
+  localStorage.setItem(storageKey, JSON.stringify(entries));
 }
 
 // If the form exists, listen for submit events
