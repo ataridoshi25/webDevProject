@@ -9,16 +9,22 @@
   </head>
   <body>
     <header>
+      <!-- Top navigation bar for the app -->
       <nav class="navbar">
         <div class="logo">FinTrack</div>
+        <!-- This empty list is filled by auth.js based on login state -->
         <ul class="nav-links" id="navLinks"></ul>
       </nav>
     </header>
 
+    <!-- Centered login form area -->
     <main class="auth-container">
       <section class="form-card">
         <h1>Welcome Back</h1>
+        <!-- This message shows validation or success feedback -->
         <p id="feedbackMessage" class="hidden"></p>
+
+        <!-- Login form: email + password + submit button -->
         <form id="loginForm" novalidate>
           <div class="form-group">
             <label for="email">Email Address</label>
@@ -33,6 +39,7 @@
       </section>
     </main>
 
+    <!-- Load the JavaScript that handles login validation and session logic -->
     <script src="js/auth.js"></script>
   </body>
 </html>

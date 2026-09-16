@@ -1,49 +1,71 @@
-// Target data structures
-let entries = [];
+// Restore saved ledger entries so they survive page reloads
+let entries = JSON.parse(localStorage.getItem("finTrackEntries") || "[]");
 
-const entryForm = document.getElementById("entryForm"); // Second validated form required
+// Grab the form and display elements from the HTML page
+const entryForm = document.getElementById("entryForm");
 const ledger = document.getElementById("ledgerList");
 const balanceDisplay = document.getElementById("totalBalance");
 
-entryForm.addEventListener("submit", (e) => {
-  e.preventDefault();
+// Save the current list to browser storage so it stays after navigation
+function saveEntries() {
+  localStorage.setItem("finTrackEntries", JSON.stringify(entries));
+}
 
-  const description = document.getElementById("desc").value;
-  const amount = parseFloat(document.getElementById("amount").value);
+// If the form exists, listen for submit events
+if (entryForm) {
+  entryForm.addEventListener("submit", (e) => {
+    e.preventDefault(); // Prevent page refresh on form submission
 
-  if (!description || isNaN(amount)) return;
+    // Read input values from the form
+    const description = document.getElementById("desc").value.trim();
+    const amount = parseFloat(document.getElementById("amount").value);
 
-  // Mutate state logic
-  const entry = { id: Date.now(), description, amount };
-  entries.push(entry);
+    // Ignore invalid input
+    if (!description || Number.isNaN(amount)) return;
 
-  updateInterface();
-  entryForm.reset();
-});
+    // Create a transaction object and add it to the array
+    const entry = { id: Date.now(), description, amount };
+    entries.push(entry);
 
+    // Save the updated list
+    saveEntries();
+
+    // Re-render the UI and clear the form
+    updateInterface();
+    entryForm.reset();
+  });
+}
+
+// Rebuild the visible transaction list from the current entries array
 function updateInterface() {
-  // Clear display slate
-  ledger.innerHTML = "";
+  ledger.innerHTML = ""; // Clear old rows before drawing the new ones
 
-  // Imperatively alter DOM structure based on mutated array state
+  // Create a list item for each entry
   entries.forEach((item) => {
     const li = document.createElement("li");
     li.className = "ledger-item";
+
+    // Show description, amount, and delete button
     li.innerHTML = `
-            <span>${item.description}</span>
-            <span class="${item.amount < 0 ? "neg" : "pos"}">$${item.amount.toFixed(2)}</span>
-            <button onclick="removeEntry(${item.id})">Delete</button>
-        `;
+      <span>${item.description}</span>
+      <span class="${item.amount < 0 ? "neg" : "pos"}">$${item.amount.toFixed(2)}</span>
+      <button type="button" onclick="removeEntry(${item.id})">Delete</button>
+    `;
+
     ledger.appendChild(li);
   });
 
-  // Reduce data to compute metrics
+  // Calculate total budget balance by adding all amounts
   const balance = entries.reduce((acc, current) => acc + current.amount, 0);
   balanceDisplay.textContent = `$${balance.toFixed(2)}`;
 }
 
-// Global scope bindings to handle structural deletion nodes
+// Remove a transaction by its id, then save and redraw
 window.removeEntry = (id) => {
   entries = entries.filter((item) => item.id !== id);
+  saveEntries();
   updateInterface();
 };
+
+// Draw the current list as soon as the script loads
+updateInterface();
