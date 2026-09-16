@@ -19,6 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function toggleForms(showRegister) {
+    if (!loginForm || !registerForm || !authTitle || !toggleAuthBtn) return;
+
     loginForm.classList.toggle("hidden", showRegister);
     registerForm.classList.toggle("hidden", !showRegister);
     authTitle.textContent = showRegister ? "Create Account" : "Welcome Back";
@@ -50,10 +52,12 @@ document.addEventListener("DOMContentLoaded", () => {
   renderNavigation(!!userSession);
   toggleForms(false);
 
-  toggleAuthBtn.addEventListener("click", () => {
-    const isRegisterVisible = !registerForm.classList.contains("hidden");
-    toggleForms(!isRegisterVisible);
-  });
+  if (toggleAuthBtn && registerForm) {
+    toggleAuthBtn.addEventListener("click", () => {
+      const isRegisterVisible = !registerForm.classList.contains("hidden");
+      toggleForms(!isRegisterVisible);
+    });
+  }
 
   if (loginForm) {
     loginForm.addEventListener("submit", (e) => {
